@@ -42,8 +42,8 @@ public class CakeController implements Callback<List<Cake>> {
             List<Cake> cakeList = response.body();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 cakeList.forEach(cake -> Log.d(TAG, cake.getName()));
-                this.cakeList = cakeList;
             }
+            this.cakeList = cakeList;
         } else {
             Log.e(TAG, "Error in downloading json");
             Log.e(TAG, String.valueOf(response.errorBody()));
