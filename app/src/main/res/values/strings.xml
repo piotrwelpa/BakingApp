@@ -1,3 +1,7 @@
 <resources>
+    <!-- ENDPOINT -->
+    <string name="cake_list_endpoint">baking.json</string>
+
+    <!-- STRINGS -->
     <string name="app_name">Baking App</string>
 </resources>
