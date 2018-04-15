@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="cake_image_height">200dp</dimen>
+    <dimen name="cake_name_cv_size">25sp</dimen>
+</resources>

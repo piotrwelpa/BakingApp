@@ -11,13 +11,19 @@
         <ImageView
             android:id="@+id/cake_image_item_cv"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5"/>
+            android:layout_height="@dimen/cake_image_height"/>
         <TextView
             android:id="@+id/cake_name_item_cv"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:padding="16dp"
+            android:textSize="@dimen/cake_name_cv_size"/>
     </LinearLayout>
+    <TextView
+        android:layout_margin="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimaryDark"/>
 
 </android.support.v7.widget.CardView>

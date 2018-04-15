@@ -5,11 +5,10 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 
-import com.example.piotr.bakingapp.CakeItemFragment;
 import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Cake;
+import com.example.piotr.bakingapp.ui.adapter.MasterListAdapter;
 import com.example.piotr.bakingapp.utils.CakeAPI;
 import com.example.piotr.bakingapp.utils.CakeApiClient;
 
@@ -22,6 +21,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +69,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populateUi(List<Cake> cakeList){
-        CakeItemFragment cakeItem = new CakeItemFragment();
-        cakeItem.setCakeListIds(cakeList);
-        cakeItem.setListIndex(0);
+//        CakeItemFragment cakeItem = new CakeItemFragment();
+//        cakeItem.setCakeList(cakeList);
+//        cakeItem.setListIndex(0);
+        MasterListFragment cakeListFragment = new MasterListFragment();
+        cakeListFragment.setCakeList(cakeList);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.item_container, cakeItem)
+                .add(R.id.item_container, cakeListFragment)
                 .commit();
     }
+
+
 }
