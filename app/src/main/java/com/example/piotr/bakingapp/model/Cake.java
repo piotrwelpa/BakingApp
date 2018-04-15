@@ -1,10 +1,13 @@
 package com.example.piotr.bakingapp.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Cake {
+public class Cake implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -24,6 +27,33 @@ public class Cake {
     @SerializedName("image")
     @Expose
     private String image;
+
+    protected Cake(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        name = in.readString();
+        if (in.readByte() == 0) {
+            servings = null;
+        } else {
+            servings = in.readInt();
+        }
+        image = in.readString();
+    }
+
+    public static final Creator<Cake> CREATOR = new Creator<Cake>() {
+        @Override
+        public Cake createFromParcel(Parcel in) {
+            return new Cake(in);
+        }
+
+        @Override
+        public Cake[] newArray(int size) {
+            return new Cake[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -73,4 +103,26 @@ public class Cake {
         this.image = image;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(id);
+        }
+        dest.writeString(name);
+        if (servings == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(servings);
+        }
+        dest.writeString(image);
+    }
 }
