@@ -69,9 +69,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populateUi(List<Cake> cakeList){
-//        CakeItemFragment cakeItem = new CakeItemFragment();
-//        cakeItem.setCakeList(cakeList);
-//        cakeItem.setListIndex(0);
         MasterListFragment cakeListFragment = new MasterListFragment();
         cakeListFragment.setCakeList(cakeList);
         FragmentManager fragmentManager = getSupportFragmentManager();
