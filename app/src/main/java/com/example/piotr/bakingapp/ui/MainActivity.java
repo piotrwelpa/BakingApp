@@ -1,10 +1,15 @@
 package com.example.piotr.bakingapp.ui;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Cake;
@@ -12,6 +17,7 @@ import com.example.piotr.bakingapp.ui.adapter.MasterListAdapter;
 import com.example.piotr.bakingapp.utils.CakeAPI;
 import com.example.piotr.bakingapp.utils.CakeApiClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -22,16 +28,24 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    private static final String KEY_CAKE_LIST_STATE = "cake_list_state";
+    private List<Cake> cakeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CakeAPI cakeApi = getCakeApiClient();
-        Call<List<Cake>> call = getCallEndpoint(cakeApi);
-        executeCall(call);
+        if (isOnline()) {
+            CakeAPI cakeApi = getCakeApiClient();
+            Call<List<Cake>> call = getCallEndpoint(cakeApi);
+            executeCall(call);
+        }else{
+            Toast.makeText(this, R.string.online_error_message, Toast.LENGTH_LONG)
+                    .show();
+        }
     }
+
 
     private CakeAPI getCakeApiClient(){
         CakeAPI cakeApi = CakeApiClient.getClient().create(CakeAPI.class);
@@ -49,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Cake>> call, Response<List<Cake>> response) {
                 if (response.isSuccessful()) {
-                    List<Cake> cakeList = response.body();
+                    cakeList = response.body();
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         cakeList.forEach(cake -> Log.d(TAG, cake.getName()));
                     }
@@ -77,5 +91,21 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
+    private boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = null;
+        if (cm != null) {
+            netInfo = cm.getActiveNetworkInfo();
+        }
 
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(KEY_CAKE_LIST_STATE,
+                (ArrayList<? extends Parcelable>) cakeList);
+    }
 }

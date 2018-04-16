@@ -2,6 +2,7 @@ package com.example.piotr.bakingapp.ui;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Cake;
 import com.example.piotr.bakingapp.ui.adapter.MasterListAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -23,7 +25,11 @@ import butterknife.ButterKnife;
 
 public class MasterListFragment extends Fragment {
 
+    public static final String KEY_RECYCLER_STATE = "key_recycler_state";
+
     private List<Cake> cakeList;
+    private static Bundle bundleRecyclerViewState;
+
 
     @BindView(R.id.master_list_rv)
     RecyclerView recyclerView;
@@ -93,4 +99,20 @@ public class MasterListFragment extends Fragment {
         this.cakeList = cakeList;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        bundleRecyclerViewState = new Bundle();
+        Parcelable listState = recyclerView.getLayoutManager().onSaveInstanceState();
+        bundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, listState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (bundleRecyclerViewState != null){
+            Parcelable listState = bundleRecyclerViewState.getParcelable(KEY_RECYCLER_STATE);
+            recyclerView.getLayoutManager().onRestoreInstanceState(listState);
+        }
+    }
 }
