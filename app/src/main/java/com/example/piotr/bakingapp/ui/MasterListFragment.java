@@ -54,7 +54,7 @@ public class MasterListFragment extends Fragment {
 
         MasterListAdapter adapter = new MasterListAdapter(cakeList);
         recyclerView.setAdapter(adapter);
-        
+
         return rootView;
     }
 
