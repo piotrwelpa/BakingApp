@@ -26,6 +26,7 @@ import butterknife.ButterKnife;
 public class MasterListFragment extends Fragment {
 
     public static final String KEY_RECYCLER_STATE = "key_recycler_state";
+    public static final String KEY_CAKE_LIST = "key_cake_list";
 
     private List<Cake> cakeList;
     private static Bundle bundleRecyclerViewState;
@@ -47,10 +48,13 @@ public class MasterListFragment extends Fragment {
 
         setLayoutManager(rootView);
 
+        if (cakeList == null){
+           setCakeList(bundleRecyclerViewState.getParcelableArrayList(KEY_CAKE_LIST));
+        }
+
         MasterListAdapter adapter = new MasterListAdapter(cakeList);
         recyclerView.setAdapter(adapter);
-
-
+        
         return rootView;
     }
 
@@ -105,6 +109,8 @@ public class MasterListFragment extends Fragment {
         bundleRecyclerViewState = new Bundle();
         Parcelable listState = recyclerView.getLayoutManager().onSaveInstanceState();
         bundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, listState);
+        bundleRecyclerViewState.putParcelableArrayList(KEY_CAKE_LIST,
+                (ArrayList<? extends Parcelable>) cakeList);
     }
 
     @Override
