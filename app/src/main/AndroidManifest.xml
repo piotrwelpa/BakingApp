@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CakeDetailsActivity"></activity>
+        <activity android:name=".ui.CakeDetailsActivity"></activity>
     </application>
 
 </manifest>

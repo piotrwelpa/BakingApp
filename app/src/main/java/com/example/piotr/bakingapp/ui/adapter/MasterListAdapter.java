@@ -1,5 +1,7 @@
 package com.example.piotr.bakingapp.ui.adapter;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Cake;
+import com.example.piotr.bakingapp.ui.CakeDetailsActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -22,6 +25,7 @@ import butterknife.ButterKnife;
 public class MasterListAdapter extends
         RecyclerView.Adapter<MasterListAdapter.CakeViewHolder> {
 
+    public static final String KEY_CAKE_ITEM = "key_cake_item";
     List<Cake> cakeList;
 
     public MasterListAdapter(List<Cake> cakeList) {
@@ -33,7 +37,7 @@ public class MasterListAdapter extends
     public CakeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_cake_item, parent, false);
-        CakeViewHolder cakeHolder = new CakeViewHolder(v);
+        CakeViewHolder cakeHolder = new CakeViewHolder(v, cakeList);
         return cakeHolder;
 
     }
@@ -81,7 +85,7 @@ public class MasterListAdapter extends
     }
 
     public static class CakeViewHolder extends RecyclerView.ViewHolder
-    implements View.OnClickListener{
+            implements View.OnClickListener {
         @BindView(R.id.cake_image_item_cv)
         ImageView cakeImage;
         @BindView(R.id.cake_name_item_cv)
@@ -89,15 +93,22 @@ public class MasterListAdapter extends
         @BindView(R.id.cake_item_cv)
         CardView cardItemView;
 
-        public CakeViewHolder(View itemView) {
+        List<Cake> cakeList;
+
+        public CakeViewHolder(View itemView, List<Cake> cakeList) {
             super(itemView);
+            this.cakeList = cakeList;
             ButterKnife.bind(this, itemView);
             cardItemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(v.getContext(), "test: "+getAdapterPosition(), Toast.LENGTH_SHORT).show();
+            Intent ingredients = new Intent(v.getContext(), CakeDetailsActivity.class);
+            Bundle extrasBundle = new Bundle();
+            extrasBundle.putParcelable(KEY_CAKE_ITEM, cakeList.get(getAdapterPosition()));
+            ingredients.putExtras(extrasBundle);
+            v.getContext().startActivity(ingredients);
         }
     }
 }
