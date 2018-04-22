@@ -2,6 +2,7 @@ package com.example.piotr.bakingapp.ui.adapter;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import com.example.piotr.bakingapp.model.Cake;
 import com.example.piotr.bakingapp.ui.CakeDetailsActivity;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -26,6 +28,9 @@ public class MasterListAdapter extends
         RecyclerView.Adapter<MasterListAdapter.CakeViewHolder> {
 
     public static final String KEY_CAKE_ITEM = "key_cake_item";
+    public static final String KEY_INGREDIENT_LIST = "key_ingredient_list";
+    public static final String KEY_STEPS_LIST = "key_steps_list";
+
     List<Cake> cakeList;
 
     public MasterListAdapter(List<Cake> cakeList) {
@@ -107,6 +112,9 @@ public class MasterListAdapter extends
             Intent ingredients = new Intent(v.getContext(), CakeDetailsActivity.class);
             Bundle extrasBundle = new Bundle();
             extrasBundle.putParcelable(KEY_CAKE_ITEM, cakeList.get(getAdapterPosition()));
+            extrasBundle.putParcelableArrayList(KEY_INGREDIENT_LIST,
+                    (ArrayList<? extends Parcelable>) cakeList.get(getAdapterPosition()).
+                            getIngredients());
             ingredients.putExtras(extrasBundle);
             v.getContext().startActivity(ingredients);
         }
