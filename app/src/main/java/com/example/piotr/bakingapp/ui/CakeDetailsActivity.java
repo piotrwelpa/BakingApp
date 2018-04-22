@@ -65,6 +65,13 @@ public class CakeDetailsActivity extends AppCompatActivity {
     }
 
     private void populateTableUi(){
-        //TODO: populateTabletUi
+        IngredientsFragment ingredientsFragment = new IngredientsFragment();
+
+        ingredientsFragment.setIngredients(ingredientList);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .add(R.id.ingredients_container, ingredientsFragment)
+                .commit();
     }
 }
