@@ -10,7 +10,9 @@ import android.widget.ArrayAdapter;
 import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Cake;
 import com.example.piotr.bakingapp.model.Ingredient;
+import com.example.piotr.bakingapp.model.Step;
 import com.example.piotr.bakingapp.ui.adapter.MasterListAdapter;
+import com.example.piotr.bakingapp.utils.UiHelper;
 
 import java.util.ArrayList;
 
@@ -18,31 +20,25 @@ public class CakeDetailsActivity extends AppCompatActivity {
 
     Cake cake;
     ArrayList<Ingredient> ingredientList;
+    ArrayList<Step> stepList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cake_details);
 
-        setCake(getIntent().getExtras().getParcelable(MasterListAdapter.KEY_CAKE_ITEM));
+        setCake(getIntent().getExtras().getParcelable(UiHelper.KEY_CAKE_ITEM));
         setIngredientList(getIntent().getExtras()
-                .getParcelableArrayList(MasterListAdapter.KEY_INGREDIENT_LIST));
+                .getParcelableArrayList(UiHelper.KEY_INGREDIENT_LIST));
+        setStepList(getIntent().getExtras().getParcelableArrayList(
+                UiHelper.KEY_STEPS_LIST));
 
         setTitle(cake.getName());
 
-        if (isPhone()){
+        if (UiHelper.isPhone(this)){
             populatePhoneUi();
         }else{
             populateTableUi();
-        }
-    }
-
-    private boolean isPhone() {
-        try {
-            getResources().getBoolean(R.bool.isTablet);
-            return false;
-        }catch(Resources.NotFoundException e){
-            return true;
         }
     }
 
@@ -52,11 +48,15 @@ public class CakeDetailsActivity extends AppCompatActivity {
     private void setIngredientList(ArrayList<Ingredient> ingredientList){
         this.ingredientList = ingredientList;
     }
+    public void setStepList(ArrayList<Step> stepList) {
+        this.stepList = stepList;
+    }
 
     private void populatePhoneUi(){
         IngredientsFragment ingredientsFragment = new IngredientsFragment();
 
         ingredientsFragment.setIngredients(ingredientList);
+        ingredientsFragment.setStepList(stepList);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
@@ -68,6 +68,7 @@ public class CakeDetailsActivity extends AppCompatActivity {
         IngredientsFragment ingredientsFragment = new IngredientsFragment();
 
         ingredientsFragment.setIngredients(ingredientList);
+        ingredientsFragment.setStepList(stepList);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()

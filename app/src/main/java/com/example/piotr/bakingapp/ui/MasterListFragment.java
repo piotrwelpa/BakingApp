@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Cake;
 import com.example.piotr.bakingapp.ui.adapter.MasterListAdapter;
+import com.example.piotr.bakingapp.utils.UiHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +25,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MasterListFragment extends Fragment {
-
-    public static final String KEY_RECYCLER_STATE = "key_recycler_state";
-    public static final String KEY_CAKE_LIST = "key_cake_list";
 
     private List<Cake> cakeList;
     private static Bundle bundleRecyclerViewState;
@@ -49,7 +47,7 @@ public class MasterListFragment extends Fragment {
         setLayoutManager(rootView);
 
         if (cakeList == null){
-           setCakeList(bundleRecyclerViewState.getParcelableArrayList(KEY_CAKE_LIST));
+           setCakeList(bundleRecyclerViewState.getParcelableArrayList(UiHelper.KEY_CAKE_LIST));
         }
 
         MasterListAdapter adapter = new MasterListAdapter(cakeList);
@@ -60,7 +58,7 @@ public class MasterListFragment extends Fragment {
 
 
     private void setLayoutManager(View rootView) {
-        if (isPhone()){
+        if (UiHelper.isPhone(getContext())){
             setLinearLayoutManager(rootView);
         }else {
             setGridLayoutManager(rootView);
@@ -75,29 +73,11 @@ public class MasterListFragment extends Fragment {
 
     private void setGridLayoutManager(View rootView){
         GridLayoutManager gridLayoutManager =
-                new GridLayoutManager(rootView.getContext(), getColumnCount());
+                new GridLayoutManager(rootView.getContext(),
+                        UiHelper.getColumnCount(getActivity()));
         recyclerView.setLayoutManager(gridLayoutManager);
     }
 
-    private boolean isPhone() {
-        try {
-            getResources().getBoolean(R.bool.isTablet);
-            return false;
-        }catch(Resources.NotFoundException e){
-            return true;
-        }
-
-    }
-
-    private int getColumnCount() {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int widthDivider = 600;
-        int width = displayMetrics.widthPixels;
-        int nColumns = width / widthDivider;
-        if (nColumns < 2) return 2;
-        return nColumns;
-    }
 
     public void setCakeList(List<Cake> cakeList) {
         this.cakeList = cakeList;
@@ -108,16 +88,17 @@ public class MasterListFragment extends Fragment {
         super.onPause();
         bundleRecyclerViewState = new Bundle();
         Parcelable listState = recyclerView.getLayoutManager().onSaveInstanceState();
-        bundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, listState);
-        bundleRecyclerViewState.putParcelableArrayList(KEY_CAKE_LIST,
+        bundleRecyclerViewState.putParcelable(UiHelper.KEY_RECYCLER_STATE, listState);
+        bundleRecyclerViewState.putParcelableArrayList(UiHelper.KEY_CAKE_LIST,
                 (ArrayList<? extends Parcelable>) cakeList);
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
         if (bundleRecyclerViewState != null){
-            Parcelable listState = bundleRecyclerViewState.getParcelable(KEY_RECYCLER_STATE);
+            Parcelable listState = bundleRecyclerViewState.getParcelable(UiHelper.KEY_RECYCLER_STATE);
             recyclerView.getLayoutManager().onRestoreInstanceState(listState);
         }
     }

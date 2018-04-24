@@ -21,6 +21,7 @@ import com.example.piotr.bakingapp.model.Cake;
 import com.example.piotr.bakingapp.ui.adapter.MasterListAdapter;
 import com.example.piotr.bakingapp.utils.CakeAPI;
 import com.example.piotr.bakingapp.utils.CakeApiClient;
+import com.example.piotr.bakingapp.utils.UiHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,6 @@ public class MainActivity extends AppCompatActivity{
 
     private static final String TAG = MainActivity.class.getSimpleName();
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
-    private static final String KEY_CAKE_LIST_STATE = "cake_list_state";
     private List<Cake> cakeList;
 
     @Override
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(KEY_CAKE_LIST_STATE,
+        outState.putParcelableArrayList(UiHelper.KEY_CAKE_LIST,
                 (ArrayList<? extends Parcelable>) cakeList);
     }
 

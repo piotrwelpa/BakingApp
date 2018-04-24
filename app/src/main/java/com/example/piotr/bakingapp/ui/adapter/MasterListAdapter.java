@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Cake;
 import com.example.piotr.bakingapp.ui.CakeDetailsActivity;
+import com.example.piotr.bakingapp.utils.UiHelper;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -26,10 +27,6 @@ import butterknife.ButterKnife;
 
 public class MasterListAdapter extends
         RecyclerView.Adapter<MasterListAdapter.CakeViewHolder> {
-
-    public static final String KEY_CAKE_ITEM = "key_cake_item";
-    public static final String KEY_INGREDIENT_LIST = "key_ingredient_list";
-    public static final String KEY_STEPS_LIST = "key_steps_list";
 
     List<Cake> cakeList;
 
@@ -111,10 +108,13 @@ public class MasterListAdapter extends
         public void onClick(View v) {
             Intent ingredients = new Intent(v.getContext(), CakeDetailsActivity.class);
             Bundle extrasBundle = new Bundle();
-            extrasBundle.putParcelable(KEY_CAKE_ITEM, cakeList.get(getAdapterPosition()));
-            extrasBundle.putParcelableArrayList(KEY_INGREDIENT_LIST,
+            extrasBundle.putParcelable(UiHelper.KEY_CAKE_ITEM, cakeList.get(getAdapterPosition()));
+            extrasBundle.putParcelableArrayList(UiHelper.KEY_INGREDIENT_LIST,
                     (ArrayList<? extends Parcelable>) cakeList.get(getAdapterPosition()).
                             getIngredients());
+            extrasBundle.putParcelableArrayList(UiHelper.KEY_STEPS_LIST,
+                    (ArrayList<? extends Parcelable>) cakeList.get(getAdapterPosition())
+                            .getSteps());
             ingredients.putExtras(extrasBundle);
             v.getContext().startActivity(ingredients);
         }
