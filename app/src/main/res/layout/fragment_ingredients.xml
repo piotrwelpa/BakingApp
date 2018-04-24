@@ -33,7 +33,7 @@
         app:layout_constraintBottom_toTopOf="@+id/show_steps_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/ingredient_title_tv" />
+        app:layout_constraintTop_toBottomOf="@id/ingredient_title_tv" />
 
     <Button
         android:id="@+id/show_steps_btn"

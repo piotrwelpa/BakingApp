@@ -10,14 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="651fe096-1fd7-4475-820b-d45bc85a7136" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/CakeDetailsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/CakeDetailsActivity.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/IngredientsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/IngredientsFragment.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/MainActivity.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/MasterListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/MasterListFragment.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/adapter/MasterListAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/adapter/MasterListAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_ingredients.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_ingredients.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -76,16 +70,42 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StepsFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StepsFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/StepsFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="164">
-              <caret line="52" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+              <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
               <folding>
                 <element signature="e#1428#1429#0" expanded="true" />
                 <element signature="e#1468#1469#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_ingredients.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_ingredients.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="31" column="38" lean-forward="true" selection-start-line="31" selection-start-column="38" selection-end-line="31" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_master_list.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_master_list.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="4" column="8" lean-forward="false" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
@@ -2213,7 +2233,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/model/Step.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_cake_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout-w700dp/activity_cake_details.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_ingredients.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/ingredient_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_steps.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/utils/UiHelper.java" />
@@ -2226,6 +2245,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/StepsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_steps.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/StepsFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_ingredients.xml" />
       </list>
     </option>
   </component>
@@ -2278,6 +2298,24 @@
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="bakingapp" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BakingApp" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="bakingapp" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BakingApp" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="BakingApp" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
           </expand>
           <select />
@@ -2345,7 +2383,7 @@
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$PROJECT_DIR$/../../../../Sdk" />
     <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
-    <property name="device.picker.selection" value="Nexus_5X_API_26" />
+    <property name="device.picker.selection" value="NE1GAM4762100902" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../course/Android_Me" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi" />
   </component>
@@ -2845,32 +2883,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_master_list.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="8" lean-forward="false" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_cake_item.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="25" column="32" lean-forward="false" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_ingredients.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="31" column="38" lean-forward="false" selection-start-line="31" selection-start-column="38" selection-end-line="31" selection-end-column="38" />
           <folding />
         </state>
       </provider>
@@ -3029,12 +3045,34 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/StepsFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="164">
-          <caret line="52" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
           <folding>
             <element signature="e#1428#1429#0" expanded="true" />
             <element signature="e#1468#1469#0" expanded="true" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_master_list.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="8" lean-forward="false" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_ingredients.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="31" column="38" lean-forward="true" selection-start-line="31" selection-start-column="38" selection-end-line="31" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
   </component>
