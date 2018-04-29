@@ -29,6 +29,7 @@ public class IngredientsFragment extends Fragment {
     private List<Ingredient> ingredientList;
     private List<Step> stepList;
     private static Bundle bundleLinearLayoutState;
+    private View rootView;
 
     @BindView(R.id.cake_ingredients_list)
     ListView ingredientsListView;
@@ -43,7 +44,7 @@ public class IngredientsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_ingredients,
+        rootView = inflater.inflate(R.layout.fragment_ingredients,
                 container, false);
         ButterKnife.bind(this, rootView);
 
@@ -109,12 +110,12 @@ public class IngredientsFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        clearListAdapter();
         bundleLinearLayoutState = new Bundle();
         Parcelable listState = ingredientsListView.onSaveInstanceState();
         bundleLinearLayoutState.putParcelable(UiHelper.KEY_INGREDIENT_LIST_STATE, listState);
         bundleLinearLayoutState.putParcelableArrayList(UiHelper.KEY_INGREDIENT_LIST,
                 (ArrayList<? extends Parcelable>) ingredientList);
+        clearListAdapter();
     }
 
     @Override
@@ -125,6 +126,7 @@ public class IngredientsFragment extends Fragment {
                     .getParcelable(UiHelper.KEY_INGREDIENT_LIST_STATE);
             ingredientsListView.onRestoreInstanceState(listState);
         }
+        initIngredientListAdapter(rootView.getContext());
     }
 
 }

@@ -27,32 +27,35 @@ public class CakeDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cake_details);
 
+    }
+
+    private void initCake() {
         setCake(getIntent().getExtras().getParcelable(UiHelper.KEY_CAKE_ITEM));
+    }
+
+    private void initIngredientList() {
         setIngredientList(getIntent().getExtras()
                 .getParcelableArrayList(UiHelper.KEY_INGREDIENT_LIST));
+    }
+
+    private void initStepList() {
         setStepList(getIntent().getExtras().getParcelableArrayList(
                 UiHelper.KEY_STEPS_LIST));
-
-        setTitle(cake.getName());
-
-        if (UiHelper.isPhone(this)){
-            populatePhoneUi();
-        }else{
-            populateTableUi();
-        }
     }
 
     private void setCake(Cake cake) {
         this.cake = cake;
     }
-    private void setIngredientList(ArrayList<Ingredient> ingredientList){
+
+    private void setIngredientList(ArrayList<Ingredient> ingredientList) {
         this.ingredientList = ingredientList;
     }
+
     public void setStepList(ArrayList<Step> stepList) {
         this.stepList = stepList;
     }
 
-    private void populatePhoneUi(){
+    private void populatePhoneUi() {
         IngredientsFragment ingredientsFragment = new IngredientsFragment();
 
         ingredientsFragment.setIngredients(ingredientList);
@@ -64,7 +67,7 @@ public class CakeDetailsActivity extends AppCompatActivity {
                 .commit();
     }
 
-    private void populateTableUi(){
+    private void populateTableUi() {
         IngredientsFragment ingredientsFragment = new IngredientsFragment();
         ingredientsFragment.setIngredients(ingredientList);
 
@@ -80,5 +83,19 @@ public class CakeDetailsActivity extends AppCompatActivity {
         stepsFragmentManager.beginTransaction()
                 .add(R.id.steps_container, stepsFragment)
                 .commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initCake();
+        initIngredientList();
+        initStepList();
+        setTitle(cake.getName());
+        if (UiHelper.isPhone(this)) {
+            populatePhoneUi();
+        } else {
+            populateTableUi();
+        }
     }
 }
