@@ -75,7 +75,7 @@ public class CakeDetailsActivity extends AppCompatActivity {
         ingredientsFragmentManager.beginTransaction()
                 .add(R.id.ingredients_container, ingredientsFragment)
                 .commit();
-        
+
         FragmentManager stepsFragmentManager = getSupportFragmentManager();
         stepsFragmentManager.beginTransaction()
                 .add(R.id.steps_container, stepsFragment)

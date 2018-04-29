@@ -24,9 +24,9 @@
     <ListView
         android:id="@+id/cake_ingredients_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginBottom="@dimen/text_padding"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="@dimen/text_padding"
         android:layout_marginStart="@dimen/text_padding"
         android:layout_marginTop="@dimen/text_padding"
         android:orientation="vertical"

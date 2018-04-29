@@ -98,7 +98,8 @@ public class MasterListFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if (bundleRecyclerViewState != null){
-            Parcelable listState = bundleRecyclerViewState.getParcelable(UiHelper.KEY_RECYCLER_STATE);
+            Parcelable listState = bundleRecyclerViewState
+                    .getParcelable(UiHelper.KEY_RECYCLER_STATE);
             recyclerView.getLayoutManager().onRestoreInstanceState(listState);
         }
     }

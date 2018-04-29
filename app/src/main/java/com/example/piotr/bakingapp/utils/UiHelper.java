@@ -12,6 +12,7 @@ public class UiHelper {
     public static final String KEY_CAKE_LIST = "key_cake_list";
     public static final String KEY_CAKE_ITEM = "key_cake_item";
     public static final String KEY_INGREDIENT_LIST = "key_ingredient_list";
+    public static final String KEY_INGREDIENT_LIST_STATE = "key_ingredient_list_state";
     public static final String KEY_STEPS_LIST = "key_steps_list";
 
     public static boolean isPhone(Context context) {
