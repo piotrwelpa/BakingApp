@@ -66,13 +66,19 @@ public class CakeDetailsActivity extends AppCompatActivity {
 
     private void populateTableUi(){
         IngredientsFragment ingredientsFragment = new IngredientsFragment();
-
         ingredientsFragment.setIngredients(ingredientList);
-        ingredientsFragment.setStepList(stepList);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
+        StepsFragment stepsFragment = new StepsFragment();
+        stepsFragment.setStepList(stepList);
+
+        FragmentManager ingredientsFragmentManager = getSupportFragmentManager();
+        ingredientsFragmentManager.beginTransaction()
                 .add(R.id.ingredients_container, ingredientsFragment)
+                .commit();
+        
+        FragmentManager stepsFragmentManager = getSupportFragmentManager();
+        stepsFragmentManager.beginTransaction()
+                .add(R.id.steps_container, stepsFragment)
                 .commit();
     }
 }
