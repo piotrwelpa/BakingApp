@@ -24,6 +24,8 @@ public class CakeDetailsActivity extends AppCompatActivity {
     ArrayList<Step> stepList;
     StepsFragment stepsFragment;
 
+    Bundle savedInstanceState;
+
     public float x1, x2;
 
     @Override
@@ -31,6 +33,9 @@ public class CakeDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cake_details);
 
+        if (savedInstanceState != null){
+            this.savedInstanceState = savedInstanceState;
+        }
     }
 
     private void initCake() {
@@ -71,7 +76,7 @@ public class CakeDetailsActivity extends AppCompatActivity {
                 .commit();
     }
 
-    private void populateTableUi() {
+    private void populateTableUi(Bundle savedInstanceState) {
         IngredientsFragment ingredientsFragment = new IngredientsFragment();
         ingredientsFragment.setIngredients(ingredientList);
 
@@ -84,9 +89,16 @@ public class CakeDetailsActivity extends AppCompatActivity {
                 .commit();
 
         FragmentManager stepsFragmentManager = getSupportFragmentManager();
-        stepsFragmentManager.beginTransaction()
-                .add(R.id.steps_container, stepsFragment)
-                .commit();
+        if (savedInstanceState == null) {
+            stepsFragmentManager.beginTransaction()
+                    .add(R.id.steps_container, stepsFragment)
+                    .commit();
+        }else{
+            stepsFragment.setStepNumber(savedInstanceState.getInt(UiHelper.STEP_NUMBER_KEY));
+            stepsFragmentManager.beginTransaction()
+                    .replace(R.id.steps_container, stepsFragment)
+                    .commit();
+        }
     }
 
     @Override
@@ -122,7 +134,14 @@ public class CakeDetailsActivity extends AppCompatActivity {
         if (UiHelper.isPhone(this)) {
             populatePhoneUi();
         } else {
-            populateTableUi();
+            populateTableUi(savedInstanceState);
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (!UiHelper.isPhone(this))
+            outState.putInt(UiHelper.STEP_NUMBER_KEY, stepsFragment.getStepNumber());
     }
 }

@@ -2,6 +2,7 @@
 <resources>
     <dimen name="cake_image_height">200dp</dimen>
     <dimen name="cake_name_cv_size">25sp</dimen>
+    <dimen name="second_text_size">20sp</dimen>
     <dimen name="title_padding">16dp</dimen>
     <dimen name="text_padding">8dp</dimen>
     <dimen name="line_margin">4dp</dimen>

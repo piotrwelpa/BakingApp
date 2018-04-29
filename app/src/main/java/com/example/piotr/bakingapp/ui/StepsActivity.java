@@ -27,22 +27,32 @@ public class StepsActivity extends AppCompatActivity {
 
         setStepList(getIntent().getExtras().getParcelableArrayList(
                 UiHelper.KEY_STEPS_LIST));
-        populatePhoneUi();
+
+        populatePhoneUi(savedInstanceState);
+
     }
 
     public void setStepList(ArrayList<Step> stepList) {
         this.stepList = stepList;
     }
 
-    private void populatePhoneUi() {
+    private void populatePhoneUi(Bundle savedInstanceState) {
         stepsFragment = new StepsFragment();
 
         stepsFragment.setStepList(stepList);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .add(R.id.steps_container, stepsFragment)
-                .commit();
+
+        if (savedInstanceState == null) {
+            fragmentManager.beginTransaction()
+                    .add(R.id.steps_container, stepsFragment)
+                    .commit();
+        }else{
+            stepsFragment.setStepNumber(savedInstanceState.getInt(UiHelper.STEP_NUMBER_KEY));
+            fragmentManager.beginTransaction()
+                    .replace(R.id.steps_container, stepsFragment)
+                    .commit();
+        }
     }
 
     @Override
@@ -66,5 +76,11 @@ public class StepsActivity extends AppCompatActivity {
                 break;
         }
         return super.onTouchEvent(event);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(UiHelper.STEP_NUMBER_KEY, stepsFragment.getStepNumber());
     }
 }
