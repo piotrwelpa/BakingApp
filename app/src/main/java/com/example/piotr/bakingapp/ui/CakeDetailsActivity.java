@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.widget.ArrayAdapter;
 
 import com.example.piotr.bakingapp.R;
@@ -21,6 +22,9 @@ public class CakeDetailsActivity extends AppCompatActivity {
     Cake cake;
     ArrayList<Ingredient> ingredientList;
     ArrayList<Step> stepList;
+    StepsFragment stepsFragment;
+
+    public float x1, x2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +75,7 @@ public class CakeDetailsActivity extends AppCompatActivity {
         IngredientsFragment ingredientsFragment = new IngredientsFragment();
         ingredientsFragment.setIngredients(ingredientList);
 
-        StepsFragment stepsFragment = new StepsFragment();
+        stepsFragment = new StepsFragment();
         stepsFragment.setStepList(stepList);
 
         FragmentManager ingredientsFragmentManager = getSupportFragmentManager();
@@ -83,6 +87,29 @@ public class CakeDetailsActivity extends AppCompatActivity {
         stepsFragmentManager.beginTransaction()
                 .add(R.id.steps_container, stepsFragment)
                 .commit();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                x1 = event.getX();
+                break;
+            case MotionEvent.ACTION_UP:
+                x2 = event.getX();
+                float deltaX = x2 - x1;
+                if (Math.abs(deltaX) > UiHelper.MIN_DISTANCE) {
+                    if (x2 > x1) {
+                        // Previous step
+                        stepsFragment.decraseStepNumber();
+                    }else {
+                        //Next step
+                        stepsFragment.incraseStepNumber();
+                    }
+                }
+                break;
+        }
+        return super.onTouchEvent(event);
     }
 
     @Override

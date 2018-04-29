@@ -15,6 +15,8 @@ public class UiHelper {
     public static final String KEY_INGREDIENT_LIST_STATE = "key_ingredient_list_state";
     public static final String KEY_STEPS_LIST = "key_steps_list";
 
+    public static final int MIN_DISTANCE = 150;
+
     public static boolean isPhone(Context context) {
         try {
             context.getResources().getBoolean(R.bool.isTablet);

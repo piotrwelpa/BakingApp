@@ -1,8 +1,11 @@
 package com.example.piotr.bakingapp.ui;
 
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.widget.Toast;
 
 import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Step;
@@ -13,6 +16,9 @@ import java.util.ArrayList;
 public class StepsActivity extends AppCompatActivity {
 
     private ArrayList<Step> stepList;
+    StepsFragment stepsFragment;
+
+    public float x1, x2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +34,8 @@ public class StepsActivity extends AppCompatActivity {
         this.stepList = stepList;
     }
 
-    private void populatePhoneUi(){
-        StepsFragment stepsFragment = new StepsFragment();
+    private void populatePhoneUi() {
+        stepsFragment = new StepsFragment();
 
         stepsFragment.setStepList(stepList);
 
@@ -37,5 +43,28 @@ public class StepsActivity extends AppCompatActivity {
         fragmentManager.beginTransaction()
                 .add(R.id.steps_container, stepsFragment)
                 .commit();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                x1 = event.getX();
+                break;
+            case MotionEvent.ACTION_UP:
+                x2 = event.getX();
+                float deltaX = x2 - x1;
+                if (Math.abs(deltaX) > UiHelper.MIN_DISTANCE) {
+                    if (x2 > x1) {
+                        // Previous step
+                        stepsFragment.decraseStepNumber();
+                    }else {
+                        //Next step
+                        stepsFragment.incraseStepNumber();
+                    }
+                }
+                break;
+        }
+        return super.onTouchEvent(event);
     }
 }
