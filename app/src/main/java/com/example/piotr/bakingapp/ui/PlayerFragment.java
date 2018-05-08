@@ -1,5 +1,6 @@
 package com.example.piotr.bakingapp.ui;
 
+import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,8 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Step;
@@ -32,31 +31,22 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class StepsFragment extends Fragment {
+public class PlayerFragment extends Fragment {
 
+    private int stepNumber = 0;
     private static Bundle bundleLinearLayoutState;
     private ArrayList<Step> stepList;
-    private int stepNumber = 0;
 
     private SimpleExoPlayer exoPlayer;
 
     @BindView(R.id.playerView)
     SimpleExoPlayerView playerView;
-    @BindView(R.id.short_desc_steps_tv)
-    TextView shortDescSteps;
 
-    @BindView(R.id.desc_steps_tv)
-    TextView descSteps;
-
-
-    public StepsFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_steps,
+        final View rootView = inflater.inflate(R.layout.fragment_player,
                 container, false);
         ButterKnife.bind(this, rootView);
         playerView.setDefaultArtwork(BitmapFactory.decodeResource(
@@ -70,43 +60,11 @@ public class StepsFragment extends Fragment {
         return rootView;
     }
 
-    public void setStepList(ArrayList<Step> stepList) {
-        this.stepList = stepList;
-    }
-
-    public void incraseStepNumber() {
-        if (stepNumber < stepList.size() - 1) {
-            stepNumber++;
-            populateUi();
-        } else {
-            Toast.makeText(getContext(), "Last step reached.", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void decraseStepNumber() {
-        if (stepNumber > 0) {
-            stepNumber--;
-            populateUi();
-        } else {
-            Toast.makeText(getContext(), "First step reached.", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public int getStepNumber() {
-        return stepNumber;
-    }
-
     public void setStepNumber(int stepNumber) {
         this.stepNumber = stepNumber;
     }
-
-    private void populateUi() {
-        releasePlayer();
-        shortDescSteps.setText(String.valueOf(stepList.get(stepNumber).getShortDescription()));
-        descSteps.setText(String.valueOf(stepList.get(stepNumber).getDescription()));
-        Uri uri = Uri.parse(stepList.get(stepNumber).getVideoURL());
-        if(uri != null)
-            initializePlayer(uri);
+    public void setStepList(ArrayList<Step> stepList) {
+        this.stepList = stepList;
     }
 
     private void initializePlayer(Uri mediaUri) {
@@ -131,6 +89,13 @@ public class StepsFragment extends Fragment {
             exoPlayer.release();
             exoPlayer = null;
         }
+    }
+
+    private void populateUi() {
+        releasePlayer();
+        Uri uri = Uri.parse(stepList.get(stepNumber).getVideoURL());
+        if(uri != null)
+            initializePlayer(uri);
     }
 
     @Override

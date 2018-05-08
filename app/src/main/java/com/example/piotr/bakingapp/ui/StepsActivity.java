@@ -4,6 +4,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
@@ -28,7 +29,12 @@ public class StepsActivity extends AppCompatActivity {
         setStepList(getIntent().getExtras().getParcelableArrayList(
                 UiHelper.KEY_STEPS_LIST));
 
-        populatePhoneUi(savedInstanceState);
+        if (UiHelper.isVerticalOrientation(this)) {
+            populatePhoneUi(savedInstanceState);
+        } else {
+            if (savedInstanceState != null)
+                populateHorizontalUi(savedInstanceState);
+        }
 
     }
 
@@ -47,12 +53,26 @@ public class StepsActivity extends AppCompatActivity {
             fragmentManager.beginTransaction()
                     .add(R.id.steps_container, stepsFragment)
                     .commit();
-        }else{
+        } else {
             stepsFragment.setStepNumber(savedInstanceState.getInt(UiHelper.STEP_NUMBER_KEY));
             fragmentManager.beginTransaction()
                     .replace(R.id.steps_container, stepsFragment)
                     .commit();
         }
+    }
+
+    private void populateHorizontalUi(Bundle savedInstanceState) {
+        PlayerFragment playerFragment = new PlayerFragment();
+
+        playerFragment.setStepList(stepList);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        playerFragment.setStepNumber(savedInstanceState.getInt(UiHelper.STEP_NUMBER_KEY));
+        fragmentManager.beginTransaction()
+                .replace(R.id.steps_container, playerFragment)
+                .commit();
+
     }
 
     @Override
@@ -68,7 +88,7 @@ public class StepsActivity extends AppCompatActivity {
                     if (x2 > x1) {
                         // Previous step
                         stepsFragment.decraseStepNumber();
-                    }else {
+                    } else {
                         //Next step
                         stepsFragment.incraseStepNumber();
                     }
@@ -81,6 +101,7 @@ public class StepsActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(UiHelper.STEP_NUMBER_KEY, stepsFragment.getStepNumber());
+        if (stepsFragment != null)
+            outState.putInt(UiHelper.STEP_NUMBER_KEY, stepsFragment.getStepNumber());
     }
 }

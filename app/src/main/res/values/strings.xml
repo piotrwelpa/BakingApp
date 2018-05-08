@@ -5,7 +5,6 @@
     <!-- STRINGS -->
     <string name="app_name">Baking App</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="online_error_message">Cannot connect to internet. Check connection or internet permissions</string>
     <string name="show_steps">Show steps</string>

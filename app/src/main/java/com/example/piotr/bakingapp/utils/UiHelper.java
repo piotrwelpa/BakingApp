@@ -36,4 +36,12 @@ public class UiHelper {
         if (nColumns < 2) return 2;
         return nColumns;
     }
+
+    public static boolean isVerticalOrientation(Activity activity) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+        return width < height;
+    }
 }
