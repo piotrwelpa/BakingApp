@@ -1,12 +1,15 @@
 package com.example.piotr.bakingapp.ui;
 
+import android.os.Build;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.Toast;
+import android.view.Window;
+import android.view.WindowManager;
+import android.support.v7.app.ActionBar;
 
 import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Step;
@@ -18,13 +21,14 @@ public class StepsActivity extends AppCompatActivity {
 
     private ArrayList<Step> stepList;
     StepsFragment stepsFragment;
+    PlayerFragment playerFragment;
 
     public float x1, x2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_steps);
+
 
         setStepList(getIntent().getExtras().getParcelableArrayList(
                 UiHelper.KEY_STEPS_LIST));
@@ -35,6 +39,7 @@ public class StepsActivity extends AppCompatActivity {
             if (savedInstanceState != null)
                 populateHorizontalUi(savedInstanceState);
         }
+        setContentView(R.layout.activity_steps);
 
     }
 
@@ -62,7 +67,19 @@ public class StepsActivity extends AppCompatActivity {
     }
 
     private void populateHorizontalUi(Bundle savedInstanceState) {
-        PlayerFragment playerFragment = new PlayerFragment();
+        final ActionBar actionBar = this.getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.hide();
+        }
+
+        Window w = getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+
+        playerFragment = new PlayerFragment();
 
         playerFragment.setStepList(stepList);
 
@@ -103,5 +120,7 @@ public class StepsActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         if (stepsFragment != null)
             outState.putInt(UiHelper.STEP_NUMBER_KEY, stepsFragment.getStepNumber());
+        else if (playerFragment != null)
+            outState.putInt(UiHelper.STEP_NUMBER_KEY, playerFragment.getStepNumber());
     }
 }

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.StepsFragment">
 
@@ -10,16 +10,16 @@
     <com.google.android.exoplayer2.ui.SimpleExoPlayerView
         android:id="@+id/playerView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/zero_dp"
         android:layout_weight="4"
-        android:layout_marginBottom="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp" />
+        android:layout_marginBottom="@dimen/zero_dp"
+        android:layout_marginLeft="@dimen/zero_dp"
+        android:layout_marginRight="@dimen/zero_dp"
+        android:layout_marginTop="@dimen/zero_dp" />
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/zero_dp"
         android:layout_weight="3">
 
         <LinearLayout
@@ -45,4 +45,18 @@
                 android:textSize="@dimen/second_text_size" />
         </LinearLayout>
     </ScrollView>
+    <TextView
+        android:layout_margin="@dimen/line_margin"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_size"
+        android:layout_gravity="bottom"
+        android:background="@color/colorPrimaryDark"/>
+    <TextView
+        android:background="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/zero_dp"
+        android:layout_weight="0.5"
+        android:layout_gravity="bottom"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/swipe_here_to_move_to_next_previous_step"/>
 </LinearLayout>

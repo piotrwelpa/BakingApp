@@ -9,4 +9,5 @@
     <string name="online_error_message">Cannot connect to internet. Check connection or internet permissions</string>
     <string name="show_steps">Show steps</string>
     <string name="ingredients">Ingredients:</string>
+    <string name="swipe_here_to_move_to_next_previous_step">Swipe here to move to next/previous step</string>
 </resources>

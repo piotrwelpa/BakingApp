@@ -63,9 +63,13 @@ public class PlayerFragment extends Fragment {
     public void setStepNumber(int stepNumber) {
         this.stepNumber = stepNumber;
     }
+    public int getStepNumber() {
+        return stepNumber;
+    }
     public void setStepList(ArrayList<Step> stepList) {
         this.stepList = stepList;
     }
+
 
     private void initializePlayer(Uri mediaUri) {
         if (exoPlayer == null) {
