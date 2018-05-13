@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.piotr.bakingapp.EspressoIdlingResouce;
 import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Cake;
 import com.example.piotr.bakingapp.ui.adapter.MasterListAdapter;
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void executeCall(Call<List<Cake>> call) {
+        EspressoIdlingResouce.increment();
         call.enqueue(new Callback<List<Cake>>() {
             @Override
             public void onResponse(Call<List<Cake>> call, Response<List<Cake>> response) {
@@ -78,6 +80,7 @@ public class MainActivity extends AppCompatActivity{
                     Log.e(TAG, "Error in downloading json");
                     Log.e(TAG, String.valueOf(response.errorBody()));
                 }
+                EspressoIdlingResouce.decrement();
             }
 
             @Override
@@ -109,9 +112,10 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+
         outState.putParcelableArrayList(UiHelper.KEY_CAKE_LIST,
                 (ArrayList<? extends Parcelable>) cakeList);
+        super.onSaveInstanceState(outState);
     }
 
 }
