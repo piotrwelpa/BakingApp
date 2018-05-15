@@ -52,6 +52,7 @@
         android:layout_gravity="bottom"
         android:background="@color/colorPrimaryDark"/>
     <TextView
+        android:id="@+id/swipe_placeholder"
         android:background="@color/colorAccent"
         android:layout_width="match_parent"
         android:layout_height="@dimen/zero_dp"
