@@ -1,25 +1,19 @@
 package com.example.piotr.bakingapp.ui;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.os.Build;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.piotr.bakingapp.EspressoIdlingResouce;
+import com.example.piotr.bakingapp.utils.EspressoIdlingResouce;
 import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Cake;
-import com.example.piotr.bakingapp.ui.adapter.MasterListAdapter;
 import com.example.piotr.bakingapp.utils.CakeAPI;
 import com.example.piotr.bakingapp.utils.CakeApiClient;
 import com.example.piotr.bakingapp.utils.UiHelper;
@@ -42,9 +36,9 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (isOnline()) {
-            CakeAPI cakeApi = getCakeApiClient();
-            Call<List<Cake>> call = getCallEndpoint(cakeApi);
+        if (CakeApiClient.isOnline(this)) {
+            CakeAPI cakeApi = CakeApiClient.getCakeApiClient();
+            Call<List<Cake>> call = CakeApiClient.getCallEndpoint(cakeApi, this);
             executeCall(call);
         } else {
             Toast.makeText(this, R.string.online_error_message, Toast.LENGTH_LONG)
@@ -53,16 +47,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-    private CakeAPI getCakeApiClient() {
-        CakeAPI cakeApi = CakeApiClient.getClient().create(CakeAPI.class);
-        return cakeApi;
-    }
 
-    private Call<List<Cake>> getCallEndpoint(CakeAPI cakeApi) {
-        Call<List<Cake>> call = cakeApi.getCakes(getString(R.string.cake_list_endpoint));
-        Log.d(TAG, "Calling endpoint: " + getString(R.string.cake_list_endpoint));
-        return call;
-    }
 
     private void executeCall(Call<List<Cake>> call) {
         EspressoIdlingResouce.increment();
@@ -99,16 +84,6 @@ public class MainActivity extends AppCompatActivity{
                 .commit();
     }
 
-    private boolean isOnline() {
-        ConnectivityManager cm =
-                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = null;
-        if (cm != null) {
-            netInfo = cm.getActiveNetworkInfo();
-        }
-
-        return netInfo != null && netInfo.isConnectedOrConnecting();
-    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

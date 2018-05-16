@@ -1,4 +1,4 @@
-package com.example.piotr.bakingapp;
+package com.example.piotr.bakingapp.utils;
 
 import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.idling.CountingIdlingResource;

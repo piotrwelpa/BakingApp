@@ -6,6 +6,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.example.piotr.bakingapp.ui.MainActivity;
+import com.example.piotr.bakingapp.utils.EspressoIdlingResouce;
 
 import junit.framework.AssertionFailedError;
 
@@ -26,59 +27,61 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
 public class InstrumentedTest {
-    @Rule public ActivityTestRule<MainActivity> mainActivtyRule =
+    @Rule
+    public ActivityTestRule<MainActivity> mainActivtyRule =
             new ActivityTestRule<MainActivity>(MainActivity.class);
 
     @Before
-    public void init(){
+    public void init() {
         IdlingRegistry.getInstance().register(EspressoIdlingResouce.getIdlingResource());
         mainActivtyRule.getActivity().getSupportFragmentManager().beginTransaction();
     }
 
     @After
-    public void unregisterIdlingResource(){
+    public void unregisterIdlingResource() {
         IdlingRegistry.getInstance().unregister(EspressoIdlingResouce.getIdlingResource());
     }
 
     @Test
-    public void displaySteps(){
+    public void displaySteps() {
         onView(withId(R.id.master_list_rv)).check(matches(isDisplayed()));
     }
 
     @Test
-    public void onListItemClick(){
+    public void onListItemClick() {
         onView(withId(R.id.master_list_rv)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
     }
 
     @Test
-    public void onIngredientButtonClick(){
+    public void onIngredientButtonClick() {
         onView(withId(R.id.master_list_rv)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         try {
             onView(withId(R.id.show_steps_btn)).check(matches(isDisplayed()));
             onView(withId(R.id.show_steps_btn)).perform(click());
-        }catch (AssertionFailedError ignored){
+        } catch (AssertionFailedError ignored) {
 
         }
 
     }
 
     @Test
-    public void checkStepDisplayed(){
+    public void checkStepDisplayed() {
         onView(withId(R.id.master_list_rv)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         try {
             onView(withId(R.id.show_steps_btn)).check(matches(isDisplayed()));
             onView(withId(R.id.show_steps_btn)).perform(click());
-        }catch (AssertionFailedError ignored){}
+        } catch (AssertionFailedError ignored) {
+        }
         onView(withId(R.id.desc_steps_tv)).check(matches(withText("Recipe Introduction")));
     }
 
     @Test
-    public void swipeToNextStep(){
+    public void swipeToNextStep() {
         onView(withId(R.id.master_list_rv)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         try {
             onView(withId(R.id.show_steps_btn)).check(matches(isDisplayed()));
             onView(withId(R.id.show_steps_btn)).perform(click());
-        }catch (AssertionFailedError ignored){
+        } catch (AssertionFailedError ignored) {
         }
         onView(withId(R.id.swipe_placeholder)).perform(swipeLeft());
         onView(withId(R.id.short_desc_steps_tv)).check(matches(withText("Starting prep")));
