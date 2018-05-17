@@ -11,11 +11,11 @@
         android:id="@+id/playerView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/zero_dp"
-        android:layout_weight="4"
         android:layout_marginBottom="@dimen/zero_dp"
         android:layout_marginLeft="@dimen/zero_dp"
         android:layout_marginRight="@dimen/zero_dp"
-        android:layout_marginTop="@dimen/zero_dp" />
+        android:layout_marginTop="@dimen/zero_dp"
+        android:layout_weight="4" />
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -45,19 +45,21 @@
                 android:textSize="@dimen/second_text_size" />
         </LinearLayout>
     </ScrollView>
+
     <TextView
-        android:layout_margin="@dimen/line_margin"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_size"
         android:layout_gravity="bottom"
-        android:background="@color/colorPrimaryDark"/>
+        android:layout_margin="@dimen/line_margin"
+        android:background="@color/colorPrimaryDark" />
+
     <TextView
         android:id="@+id/swipe_placeholder"
-        android:background="@color/colorAccent"
         android:layout_width="match_parent"
         android:layout_height="@dimen/zero_dp"
-        android:layout_weight="0.5"
         android:layout_gravity="bottom"
+        android:layout_weight="0.5"
+        android:background="@color/colorAccent"
         android:gravity="center_horizontal|center_vertical"
-        android:text="@string/swipe_here_to_move_to_next_previous_step"/>
+        android:text="@string/swipe_here_to_move_to_next_previous_step" />
 </LinearLayout>

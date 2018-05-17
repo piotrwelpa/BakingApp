@@ -1,21 +1,19 @@
 package com.example.piotr.bakingapp.ui;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Parcelable;
-import android.support.v4.app.FragmentManager;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.piotr.bakingapp.utils.EspressoIdlingResouce;
 import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Cake;
 import com.example.piotr.bakingapp.utils.CakeAPI;
 import com.example.piotr.bakingapp.utils.CakeApiClient;
+import com.example.piotr.bakingapp.utils.EspressoIdlingResource;
 import com.example.piotr.bakingapp.utils.UiHelper;
 
 import java.util.ArrayList;
@@ -25,10 +23,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private List<Cake> cakeList;
 
     @Override
@@ -47,13 +44,11 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-
-
     private void executeCall(Call<List<Cake>> call) {
-        EspressoIdlingResouce.increment();
+        EspressoIdlingResource.increment();
         call.enqueue(new Callback<List<Cake>>() {
             @Override
-            public void onResponse(Call<List<Cake>> call, Response<List<Cake>> response) {
+            public void onResponse(@NonNull Call<List<Cake>> call, @NonNull Response<List<Cake>> response) {
                 if (response.isSuccessful()) {
                     cakeList = response.body();
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -65,11 +60,11 @@ public class MainActivity extends AppCompatActivity{
                     Log.e(TAG, "Error in downloading json");
                     Log.e(TAG, String.valueOf(response.errorBody()));
                 }
-                EspressoIdlingResouce.decrement();
+                EspressoIdlingResource.decrement();
             }
 
             @Override
-            public void onFailure(Call<List<Cake>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Cake>> call, @NonNull Throwable t) {
                 t.printStackTrace();
             }
         });

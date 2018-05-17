@@ -1,15 +1,12 @@
 package com.example.piotr.bakingapp.ui;
 
-import android.os.Build;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
-import android.support.v7.app.ActionBar;
 
 import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Step;
@@ -20,10 +17,11 @@ import java.util.ArrayList;
 public class StepsActivity extends AppCompatActivity {
 
     private ArrayList<Step> stepList;
-    StepsFragment stepsFragment;
-    PlayerFragment playerFragment;
+    private StepsFragment stepsFragment;
+    private PlayerFragment playerFragment;
 
-    public float x1, x2;
+    private float x1;
+    private float x2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +41,7 @@ public class StepsActivity extends AppCompatActivity {
 
     }
 
-    public void setStepList(ArrayList<Step> stepList) {
+    private void setStepList(ArrayList<Step> stepList) {
         this.stepList = stepList;
     }
 
@@ -78,7 +76,6 @@ public class StepsActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
-
         playerFragment = new PlayerFragment();
 
         playerFragment.setStepList(stepList);
@@ -104,7 +101,7 @@ public class StepsActivity extends AppCompatActivity {
                 if (Math.abs(deltaX) > UiHelper.MIN_DISTANCE) {
                     if (x2 > x1) {
                         // Previous step
-                        stepsFragment.decraseStepNumber();
+                        stepsFragment.decreaseStepNumber();
                     } else {
                         //Next step
                         stepsFragment.incraseStepNumber();

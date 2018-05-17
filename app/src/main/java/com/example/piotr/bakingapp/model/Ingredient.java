@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Ingredient implements Parcelable{
+public class Ingredient implements Parcelable {
 
     @SerializedName("quantity")
     @Expose
@@ -18,7 +18,7 @@ public class Ingredient implements Parcelable{
     @Expose
     private String ingredient;
 
-    protected Ingredient(Parcel in) {
+    private Ingredient(Parcel in) {
         if (in.readByte() == 0) {
             quantity = null;
         } else {

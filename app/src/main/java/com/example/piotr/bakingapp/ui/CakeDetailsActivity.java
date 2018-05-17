@@ -1,39 +1,36 @@
 package com.example.piotr.bakingapp.ui;
 
-import android.content.res.Resources;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.ArrayAdapter;
 
 import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Cake;
 import com.example.piotr.bakingapp.model.Ingredient;
 import com.example.piotr.bakingapp.model.Step;
-import com.example.piotr.bakingapp.ui.adapter.MasterListAdapter;
 import com.example.piotr.bakingapp.utils.UiHelper;
 
 import java.util.ArrayList;
 
 public class CakeDetailsActivity extends AppCompatActivity {
 
-    Cake cake;
-    ArrayList<Ingredient> ingredientList;
-    ArrayList<Step> stepList;
-    StepsFragment stepsFragment;
+    private Cake cake;
+    private ArrayList<Ingredient> ingredientList;
+    private ArrayList<Step> stepList;
+    private StepsFragment stepsFragment;
 
-    Bundle savedInstanceState;
+    private Bundle savedInstanceState;
 
-    public float x1, x2;
+    private float x1;
+    private float x2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cake_details);
 
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             this.savedInstanceState = savedInstanceState;
         }
     }
@@ -60,7 +57,7 @@ public class CakeDetailsActivity extends AppCompatActivity {
         this.ingredientList = ingredientList;
     }
 
-    public void setStepList(ArrayList<Step> stepList) {
+    private void setStepList(ArrayList<Step> stepList) {
         this.stepList = stepList;
     }
 
@@ -95,7 +92,7 @@ public class CakeDetailsActivity extends AppCompatActivity {
             stepsFragmentManager.beginTransaction()
                     .add(R.id.steps_container, stepsFragment)
                     .commit();
-        }else{
+        } else {
             stepsFragment.setStepNumber(savedInstanceState.getInt(UiHelper.STEP_NUMBER_KEY));
             stepsFragmentManager.beginTransaction()
                     .replace(R.id.steps_container, stepsFragment)
@@ -115,8 +112,8 @@ public class CakeDetailsActivity extends AppCompatActivity {
                 if (Math.abs(deltaX) > UiHelper.MIN_DISTANCE) {
                     if (x2 > x1) {
                         // Previous step
-                        stepsFragment.decraseStepNumber();
-                    }else {
+                        stepsFragment.decreaseStepNumber();
+                    } else {
                         //Next step
                         stepsFragment.incraseStepNumber();
                     }

@@ -9,18 +9,18 @@
         android:id="@+id/cake_name_widget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/line_margin8"
         android:textColor="#ffffff"
-        android:textSize="22sp"
+        android:textSize="@dimen/name_widget_size"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/ingredient_list_widget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/line_margin8"
         android:textColor="#ffffff"
-        android:textSize="18sp"
+        android:textSize="@dimen/list_widget_size"
         android:textStyle="bold|italic" />
 
 </LinearLayout>

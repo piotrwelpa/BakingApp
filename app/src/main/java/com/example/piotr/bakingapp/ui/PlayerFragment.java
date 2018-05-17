@@ -1,9 +1,9 @@
 package com.example.piotr.bakingapp.ui;
 
-import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +44,7 @@ public class PlayerFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_player,
                 container, false);
@@ -63,9 +63,11 @@ public class PlayerFragment extends Fragment {
     public void setStepNumber(int stepNumber) {
         this.stepNumber = stepNumber;
     }
+
     public int getStepNumber() {
         return stepNumber;
     }
+
     public void setStepList(ArrayList<Step> stepList) {
         this.stepList = stepList;
     }
@@ -98,7 +100,7 @@ public class PlayerFragment extends Fragment {
     private void populateUi() {
         releasePlayer();
         Uri uri = Uri.parse(stepList.get(stepNumber).getVideoURL());
-        if(uri != null)
+        if (uri != null)
             initializePlayer(uri);
     }
 

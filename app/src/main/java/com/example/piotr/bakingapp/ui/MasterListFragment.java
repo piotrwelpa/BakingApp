@@ -1,14 +1,12 @@
 package com.example.piotr.bakingapp.ui;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +36,7 @@ public class MasterListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         final View rootView = inflater.inflate(R.layout.fragment_master_list, container, false);
@@ -46,8 +44,8 @@ public class MasterListFragment extends Fragment {
 
         setLayoutManager(rootView);
 
-        if (cakeList == null){
-           setCakeList(bundleRecyclerViewState.getParcelableArrayList(UiHelper.KEY_CAKE_LIST));
+        if (cakeList == null) {
+            setCakeList(bundleRecyclerViewState.getParcelableArrayList(UiHelper.KEY_CAKE_LIST));
         }
 
         MasterListAdapter adapter = new MasterListAdapter(cakeList);
@@ -58,20 +56,20 @@ public class MasterListFragment extends Fragment {
 
 
     private void setLayoutManager(View rootView) {
-        if (UiHelper.isPhone(getContext())){
+        if (UiHelper.isPhone(getContext())) {
             setLinearLayoutManager(rootView);
-        }else {
+        } else {
             setGridLayoutManager(rootView);
         }
     }
 
-    private void setLinearLayoutManager(View rootView){
+    private void setLinearLayoutManager(View rootView) {
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(rootView.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
     }
 
-    private void setGridLayoutManager(View rootView){
+    private void setGridLayoutManager(View rootView) {
         GridLayoutManager gridLayoutManager =
                 new GridLayoutManager(rootView.getContext(),
                         UiHelper.getColumnCount(getActivity()));
@@ -97,7 +95,7 @@ public class MasterListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (bundleRecyclerViewState != null){
+        if (bundleRecyclerViewState != null) {
             Parcelable listState = bundleRecyclerViewState
                     .getParcelable(UiHelper.KEY_RECYCLER_STATE);
             recyclerView.getLayoutManager().onRestoreInstanceState(listState);

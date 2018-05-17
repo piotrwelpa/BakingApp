@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Cake;
@@ -28,7 +27,7 @@ import butterknife.ButterKnife;
 public class MasterListAdapter extends
         RecyclerView.Adapter<MasterListAdapter.CakeViewHolder> {
 
-    List<Cake> cakeList;
+    private final List<Cake> cakeList;
 
     public MasterListAdapter(List<Cake> cakeList) {
         this.cakeList = cakeList;
@@ -39,8 +38,7 @@ public class MasterListAdapter extends
     public CakeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_cake_item, parent, false);
-        CakeViewHolder cakeHolder = new CakeViewHolder(v, cakeList);
-        return cakeHolder;
+        return new CakeViewHolder(v, cakeList);
 
     }
 
@@ -95,7 +93,7 @@ public class MasterListAdapter extends
         @BindView(R.id.cake_item_cv)
         CardView cardItemView;
 
-        List<Cake> cakeList;
+        final List<Cake> cakeList;
 
         public CakeViewHolder(View itemView, List<Cake> cakeList) {
             super(itemView);

@@ -29,7 +29,7 @@ public class Cake implements Parcelable {
     @Expose
     private String image;
 
-    protected Cake(Parcel in) {
+    private Cake(Parcel in) {
         if (in.readByte() == 0) {
             id = null;
         } else {

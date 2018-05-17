@@ -3,15 +3,14 @@
     <dimen name="cake_image_height">200dp</dimen>
     <dimen name="cake_name_cv_size">25sp</dimen>
     <dimen name="second_text_size">20sp</dimen>
+    <dimen name="name_widget_size">22sp</dimen>
+    <dimen name="list_widget_size">18sp</dimen>
     <dimen name="title_padding">16dp</dimen>
     <dimen name="text_padding">8dp</dimen>
     <dimen name="line_margin">4dp</dimen>
+    <dimen name="line_margin8">8dp</dimen>
     <dimen name="line_size">2dp</dimen>
     <dimen name="zero_dp">0dp</dimen>
 
-    <!--
-Refer to App Widget Documentation for margin information
-http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
-    -->
     <dimen name="widget_margin">8dp</dimen>
 </resources>

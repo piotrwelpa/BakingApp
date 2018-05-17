@@ -6,7 +6,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.example.piotr.bakingapp.ui.MainActivity;
-import com.example.piotr.bakingapp.utils.EspressoIdlingResouce;
+import com.example.piotr.bakingapp.utils.EspressoIdlingResource;
 
 import junit.framework.AssertionFailedError;
 
@@ -28,18 +28,18 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 @RunWith(AndroidJUnit4.class)
 public class InstrumentedTest {
     @Rule
-    public ActivityTestRule<MainActivity> mainActivtyRule =
-            new ActivityTestRule<MainActivity>(MainActivity.class);
+    public final ActivityTestRule<MainActivity> mainActivityRule =
+            new ActivityTestRule<>(MainActivity.class);
 
     @Before
     public void init() {
-        IdlingRegistry.getInstance().register(EspressoIdlingResouce.getIdlingResource());
-        mainActivtyRule.getActivity().getSupportFragmentManager().beginTransaction();
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.getIdlingResource());
+        mainActivityRule.getActivity().getSupportFragmentManager().beginTransaction();
     }
 
     @After
     public void unregisterIdlingResource() {
-        IdlingRegistry.getInstance().unregister(EspressoIdlingResouce.getIdlingResource());
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.getIdlingResource());
     }
 
     @Test

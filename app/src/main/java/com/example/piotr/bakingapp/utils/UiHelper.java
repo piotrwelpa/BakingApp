@@ -9,7 +9,6 @@ import com.example.piotr.bakingapp.R;
 
 public class UiHelper {
     public static final String KEY_RECYCLER_STATE = "key_recycler_state";
-    public static final String KEY_CAKE_NAME = "key_cake_name";
     public static final String KEY_CAKE_LIST = "key_cake_list";
     public static final String KEY_CAKE_ITEM = "key_cake_item";
     public static final String KEY_INGREDIENT_LIST = "key_ingredient_list";
@@ -17,16 +16,13 @@ public class UiHelper {
     public static final String KEY_STEPS_LIST = "key_steps_list";
     public static final String STEP_NUMBER_KEY = "step_number_key";
 
-    public static final String sharedPrefFile = "com.example.android.appwidget";
-
-
     public static final int MIN_DISTANCE = 150;
 
     public static boolean isPhone(Context context) {
         try {
             context.getResources().getBoolean(R.bool.isTablet);
             return false;
-        }catch(Resources.NotFoundException e){
+        } catch (Resources.NotFoundException e) {
             return true;
         }
     }

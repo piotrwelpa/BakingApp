@@ -3,14 +3,10 @@ package com.example.piotr.bakingapp.utils;
 import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.idling.CountingIdlingResource;
 
-/**
- * Created by piotr.welpa on 13.05.2018.
- */
-
-public class EspressoIdlingResouce {
+public class EspressoIdlingResource {
     private static final String RESOURCE = "GLOBAL";
 
-    private static CountingIdlingResource countingIdlingResource =
+    private static final CountingIdlingResource countingIdlingResource =
             new CountingIdlingResource(RESOURCE);
 
     public static void increment() {
