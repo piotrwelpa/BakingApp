@@ -69,6 +69,7 @@ public class CakeDetailsActivity extends AppCompatActivity {
 
         ingredientsFragment.setIngredients(ingredientList);
         ingredientsFragment.setStepList(stepList);
+        ingredientsFragment.setCakeName(cake.getName());
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
@@ -79,6 +80,7 @@ public class CakeDetailsActivity extends AppCompatActivity {
     private void populateTableUi(Bundle savedInstanceState) {
         IngredientsFragment ingredientsFragment = new IngredientsFragment();
         ingredientsFragment.setIngredients(ingredientList);
+        ingredientsFragment.setCakeName(cake.getName());
 
         stepsFragment = new StepsFragment();
         stepsFragment.setStepList(stepList);

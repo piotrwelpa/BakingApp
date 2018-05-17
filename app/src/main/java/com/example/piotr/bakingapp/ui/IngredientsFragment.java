@@ -1,21 +1,27 @@
 package com.example.piotr.bakingapp.ui;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RemoteViews;
 
 import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Ingredient;
 import com.example.piotr.bakingapp.model.Step;
 import com.example.piotr.bakingapp.ui.adapter.IngredientListAdapter;
 import com.example.piotr.bakingapp.utils.UiHelper;
+import com.example.piotr.bakingapp.widget.BakingAppWidget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +36,7 @@ public class IngredientsFragment extends Fragment {
     private List<Step> stepList;
     private static Bundle bundleLinearLayoutState;
     private View rootView;
+    private String cakeName;
 
     @BindView(R.id.cake_ingredients_list)
     ListView ingredientsListView;
@@ -61,7 +68,32 @@ public class IngredientsFragment extends Fragment {
 
         initIngredientListAdapter(rootView.getContext());
 
+        saveIngredientListAndName();
         return rootView;
+    }
+
+    private void saveIngredientListAndName() {
+//        SharedPreferences prefs = getContext().getSharedPreferences(
+//                UiHelper.sharedPrefFile, 0);
+        StringBuilder list = new StringBuilder();
+        for (Ingredient s: ingredientList) {
+            list.append(s.getQuantity()).append(" ")
+                    .append(s.getMeasure()).append(" ")
+                    .append(s.getIngredient())
+                    .append("\n");
+        }
+//        SharedPreferences.Editor prefEditor = prefs.edit();
+//        prefEditor.putString(UiHelper.KEY_INGREDIENT_LIST,list.toString());
+//        prefEditor.putString(UiHelper.KEY_CAKE_NAME, cakeName);
+
+        Context context = getContext();
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.baking_app_widget);
+        ComponentName thisWidget = new ComponentName(context, BakingAppWidget.class);
+        remoteViews.setTextViewText(R.id.ingredient_list_widget, list.toString());
+        remoteViews.setTextViewText(R.id.cake_name_widget, cakeName);
+        appWidgetManager.updateAppWidget(thisWidget, remoteViews);
+//        Log.d("UPDATE WIDGET", cakeName);
     }
 
     private void initIngredientListAdapter(Context context) {
@@ -105,6 +137,10 @@ public class IngredientsFragment extends Fragment {
 
     public void setStepList(List<Step> stepList) {
         this.stepList = stepList;
+    }
+
+    public void setCakeName(String cakeName) {
+        this.cakeName = cakeName;
     }
 
     @Override

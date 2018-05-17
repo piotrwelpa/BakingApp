@@ -1,6 +1,7 @@
 package com.example.piotr.bakingapp.widget;
 
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -110,7 +111,10 @@ public class BakingAppWidget extends AppWidgetProvider {
         }
         views.setTextViewText(R.id.ingredient_list_widget, list.toString());
         views.setTextViewText(R.id.cake_name_widget, cakeList.get(0).getName());
+
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
+
+
 }
 
