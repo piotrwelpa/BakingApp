@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ public class PlayerFragment extends Fragment {
 
     private int stepNumber = 0;
     private static Bundle bundleLinearLayoutState;
+    private long playerPosition;
     private ArrayList<Step> stepList;
 
     private SimpleExoPlayer exoPlayer;
@@ -72,6 +74,13 @@ public class PlayerFragment extends Fragment {
         this.stepList = stepList;
     }
 
+    public long getPlayerPosition() {
+        return exoPlayer.getCurrentPosition();
+    }
+
+    public void setPlayerPosition(long playerPosition) {
+        this.playerPosition = playerPosition;
+    }
 
     private void initializePlayer(Uri mediaUri) {
         if (exoPlayer == null) {
@@ -86,11 +95,14 @@ public class PlayerFragment extends Fragment {
                     getContext(), userAgent), new DefaultExtractorsFactory(), null, null);
             exoPlayer.prepare(mediaSource);
             exoPlayer.setPlayWhenReady(true);
+
+            exoPlayer.seekTo(playerPosition);
         }
     }
 
     private void releasePlayer() {
         if (exoPlayer != null) {
+            exoPlayer.prepare(null);
             exoPlayer.stop();
             exoPlayer.release();
             exoPlayer = null;

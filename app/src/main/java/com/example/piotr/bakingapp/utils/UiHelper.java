@@ -15,6 +15,7 @@ public class UiHelper {
     public static final String KEY_INGREDIENT_LIST_STATE = "key_ingredient_list_state";
     public static final String KEY_STEPS_LIST = "key_steps_list";
     public static final String STEP_NUMBER_KEY = "step_number_key";
+    public static final String EXO_PLAYER_STATE = "exo_player_state";
 
     public static final int MIN_DISTANCE = 150;
 

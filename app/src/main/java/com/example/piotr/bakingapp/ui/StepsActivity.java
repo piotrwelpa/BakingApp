@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,6 +20,7 @@ public class StepsActivity extends AppCompatActivity {
     private ArrayList<Step> stepList;
     private StepsFragment stepsFragment;
     private PlayerFragment playerFragment;
+    private long playerPosition = 0;
 
     private float x1;
     private float x2;
@@ -30,6 +32,10 @@ public class StepsActivity extends AppCompatActivity {
 
         setStepList(getIntent().getExtras().getParcelableArrayList(
                 UiHelper.KEY_STEPS_LIST));
+
+        if (savedInstanceState != null){
+            playerPosition = savedInstanceState.getLong(UiHelper.EXO_PLAYER_STATE);
+        }
 
         if (UiHelper.isVerticalOrientation(this)) {
             populatePhoneUi(savedInstanceState);
@@ -49,6 +55,7 @@ public class StepsActivity extends AppCompatActivity {
         stepsFragment = new StepsFragment();
 
         stepsFragment.setStepList(stepList);
+        stepsFragment.setPlayerPosition(playerPosition);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -79,6 +86,8 @@ public class StepsActivity extends AppCompatActivity {
         playerFragment = new PlayerFragment();
 
         playerFragment.setStepList(stepList);
+        playerFragment.setPlayerPosition(playerPosition);
+
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -91,33 +100,41 @@ public class StepsActivity extends AppCompatActivity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                x1 = event.getX();
-                break;
-            case MotionEvent.ACTION_UP:
-                x2 = event.getX();
-                float deltaX = x2 - x1;
-                if (Math.abs(deltaX) > UiHelper.MIN_DISTANCE) {
-                    if (x2 > x1) {
-                        // Previous step
-                        stepsFragment.decreaseStepNumber();
-                    } else {
-                        //Next step
-                        stepsFragment.incraseStepNumber();
+        if (UiHelper.isVerticalOrientation(this)) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    x1 = event.getX();
+                    break;
+                case MotionEvent.ACTION_UP:
+                    x2 = event.getX();
+                    float deltaX = x2 - x1;
+                    if (Math.abs(deltaX) > UiHelper.MIN_DISTANCE) {
+                        if (x2 > x1) {
+                            // Previous step
+                            stepsFragment.decreaseStepNumber();
+                        } else {
+                            //Next step
+                            stepsFragment.incraseStepNumber();
+                        }
                     }
-                }
-                break;
+                    break;
+            }
         }
         return super.onTouchEvent(event);
+
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (stepsFragment != null)
+        if (stepsFragment != null) {
             outState.putInt(UiHelper.STEP_NUMBER_KEY, stepsFragment.getStepNumber());
-        else if (playerFragment != null)
+            outState.putLong(UiHelper.EXO_PLAYER_STATE, stepsFragment.getPlayerPosition());
+            //stepsFragment.getPlayerPosition()
+        }else if (playerFragment != null) {
             outState.putInt(UiHelper.STEP_NUMBER_KEY, playerFragment.getStepNumber());
+            outState.putLong(UiHelper.EXO_PLAYER_STATE, playerFragment.getPlayerPosition());
+        }
+
     }
 }
