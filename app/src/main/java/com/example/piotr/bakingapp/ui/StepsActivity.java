@@ -1,13 +1,17 @@
 package com.example.piotr.bakingapp.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Step;
@@ -29,11 +33,10 @@ public class StepsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         setStepList(getIntent().getExtras().getParcelableArrayList(
                 UiHelper.KEY_STEPS_LIST));
 
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             playerPosition = savedInstanceState.getLong(UiHelper.EXO_PLAYER_STATE);
         }
 
@@ -131,10 +134,21 @@ public class StepsActivity extends AppCompatActivity {
             outState.putInt(UiHelper.STEP_NUMBER_KEY, stepsFragment.getStepNumber());
             outState.putLong(UiHelper.EXO_PLAYER_STATE, stepsFragment.getPlayerPosition());
             //stepsFragment.getPlayerPosition()
-        }else if (playerFragment != null) {
+        } else if (playerFragment != null) {
             outState.putInt(UiHelper.STEP_NUMBER_KEY, playerFragment.getStepNumber());
             outState.putLong(UiHelper.EXO_PLAYER_STATE, playerFragment.getPlayerPosition());
         }
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return false;
+        }
     }
 }

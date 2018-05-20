@@ -20,8 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.CakeDetailsActivity" />
-        <activity android:name=".ui.StepsActivity" />
+        <activity android:name=".ui.CakeDetailsActivity"
+            android:parentActivityName=".ui.MainActivity"/>
+        <activity android:name=".ui.StepsActivity"
+            android:parentActivityName=".ui.CakeDetailsActivity"/>
 
         <receiver android:name=".widget.BakingAppWidget">
             <intent-filter>

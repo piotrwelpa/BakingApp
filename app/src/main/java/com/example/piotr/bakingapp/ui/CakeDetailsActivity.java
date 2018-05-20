@@ -3,7 +3,9 @@ package com.example.piotr.bakingapp.ui;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
 import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Cake;
@@ -143,4 +145,5 @@ public class CakeDetailsActivity extends AppCompatActivity {
         if (!UiHelper.isPhone(this))
             outState.putInt(UiHelper.STEP_NUMBER_KEY, stepsFragment.getStepNumber());
     }
+
 }
