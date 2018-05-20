@@ -11,12 +11,10 @@ import android.widget.RemoteViews;
 import com.example.piotr.bakingapp.R;
 import com.example.piotr.bakingapp.model.Cake;
 import com.example.piotr.bakingapp.model.Ingredient;
-import com.example.piotr.bakingapp.ui.adapter.IngredientListAdapter;
 import com.example.piotr.bakingapp.utils.CakeAPI;
 import com.example.piotr.bakingapp.utils.CakeApiClient;
 import com.example.piotr.bakingapp.utils.EspressoIdlingResource;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -65,7 +63,7 @@ public class BakingAppWidget extends AppWidgetProvider {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         cakeList.forEach(cake -> Log.d(TAG, cake.getName()));
                     }
-                    populateUi(cakeList, context, appWidgetManager, appWidgetId);
+                    initUiWithFirstCakeIngredients(cakeList, context, appWidgetManager, appWidgetId);
 
                 } else {
                     Log.e(TAG, "Error in downloading json");
@@ -81,8 +79,8 @@ public class BakingAppWidget extends AppWidgetProvider {
         });
     }
 
-    private static void populateUi(List<Cake> cakeList, Context context,
-                                   AppWidgetManager appWidgetManager, int appWidgetId) {
+    private static void initUiWithFirstCakeIngredients(List<Cake> cakeList, Context context,
+                                                       AppWidgetManager appWidgetManager, int appWidgetId) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.baking_app_widget);
         StringBuilder list = new StringBuilder();
         for (Ingredient s : cakeList.get(0).getIngredients()) {

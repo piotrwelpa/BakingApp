@@ -67,11 +67,11 @@ public class IngredientsFragment extends Fragment {
 
         initIngredientListAdapter(rootView.getContext());
 
-        saveIngredientListAndName();
+        changeIngredientsOnWidgetToCurrent();
         return rootView;
     }
 
-    private void saveIngredientListAndName() {
+    private void changeIngredientsOnWidgetToCurrent() {
         StringBuilder list = new StringBuilder();
         for (Ingredient s : ingredientList) {
             list.append(s.getQuantity()).append(" ")
