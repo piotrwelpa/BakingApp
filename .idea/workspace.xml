@@ -10,8 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="651fe096-1fd7-4475-820b-d45bc85a7136" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/IngredientsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/IngredientsFragment.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/widget/BakingAppWidget.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/widget/BakingAppWidget.java" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/MainActivity.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -68,11 +67,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IngredientsFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IngredientsFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/IngredientsFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="70">
               <caret line="73" column="51" lean-forward="false" selection-start-line="73" selection-start-column="51" selection-end-line="73" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="69" column="36" lean-forward="true" selection-start-line="69" selection-start-column="36" selection-end-line="69" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -2209,7 +2218,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/ingredient_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_steps.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/adapter/MasterListAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/StepsFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_ingredients.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/MasterListFragment.java" />
@@ -2226,6 +2234,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/StepsFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/widget/BakingAppWidget.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/IngredientsFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -2841,13 +2850,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1476">
-          <caret line="112" column="62" lean-forward="false" selection-start-line="112" selection-start-column="62" selection-end-line="112" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/build/generated/source/apt/debug/com/example/piotr/bakingapp/ui/StepsFragment_ViewBinding.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -3068,6 +3070,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="70">
           <caret line="73" column="51" lean-forward="false" selection-start-line="73" selection-start-column="51" selection-end-line="73" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/piotr/bakingapp/ui/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="69" column="36" lean-forward="true" selection-start-line="69" selection-start-column="36" selection-end-line="69" selection-end-column="36" />
           <folding />
         </state>
       </provider>

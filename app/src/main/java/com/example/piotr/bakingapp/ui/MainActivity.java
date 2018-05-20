@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<List<Cake>> call, @NonNull Throwable t) {
+                Toast.makeText(getApplicationContext(), "Error in downloading cakes data",
+                        Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
         });
