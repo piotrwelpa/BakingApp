@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +40,7 @@ public class IngredientsFragment extends Fragment {
     private String cakeName;
 
     @BindView(R.id.cake_ingredients_list)
-    ListView ingredientsListView;
+    RecyclerView ingredientsListView;
     @BindView(R.id.show_steps_btn)
     Button showSteps;
 
@@ -53,6 +55,8 @@ public class IngredientsFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_ingredients,
                 container, false);
         ButterKnife.bind(this, rootView);
+
+        setLayoutManager(rootView);
 
         if (ingredientList == null) {
             setIngredients(bundleLinearLayoutState
@@ -69,6 +73,12 @@ public class IngredientsFragment extends Fragment {
 
         changeIngredientsOnWidgetToCurrent();
         return rootView;
+    }
+
+    private void setLayoutManager(View rootView) {
+        LinearLayoutManager linearLayoutManager =
+                new LinearLayoutManager(rootView.getContext());
+        ingredientsListView.setLayoutManager(linearLayoutManager);
     }
 
     private void changeIngredientsOnWidgetToCurrent() {
@@ -91,18 +101,12 @@ public class IngredientsFragment extends Fragment {
 
     private void initIngredientListAdapter(Context context) {
 
-        ingredientListAdapter = new IngredientListAdapter(
-                (ArrayList<Ingredient>) ingredientList,
-                context);
+        ingredientListAdapter = new IngredientListAdapter(ingredientList);
 
 
         ingredientsListView.setAdapter(ingredientListAdapter);
     }
 
-    private void clearListAdapter() {
-        if (ingredientListAdapter != null)
-            ingredientListAdapter.clear();
-    }
 
     private void setButtonClickListener() {
         showSteps.setOnClickListener(this::showStepButtonClick);
@@ -135,11 +139,10 @@ public class IngredientsFragment extends Fragment {
     public void onPause() {
         super.onPause();
         bundleLinearLayoutState = new Bundle();
-        Parcelable listState = ingredientsListView.onSaveInstanceState();
+        Parcelable listState = ingredientsListView.getLayoutManager().onSaveInstanceState();
         bundleLinearLayoutState.putParcelable(UiHelper.KEY_INGREDIENT_LIST_STATE, listState);
         bundleLinearLayoutState.putParcelableArrayList(UiHelper.KEY_INGREDIENT_LIST,
                 (ArrayList<? extends Parcelable>) ingredientList);
-        clearListAdapter();
     }
 
     @Override
@@ -148,7 +151,7 @@ public class IngredientsFragment extends Fragment {
         if (bundleLinearLayoutState != null) {
             Parcelable listState = bundleLinearLayoutState
                     .getParcelable(UiHelper.KEY_INGREDIENT_LIST_STATE);
-            ingredientsListView.onRestoreInstanceState(listState);
+            ingredientsListView.getLayoutManager().onRestoreInstanceState(listState);
         }
         initIngredientListAdapter(rootView.getContext());
     }
